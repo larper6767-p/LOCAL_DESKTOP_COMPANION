@@ -1,0 +1,5 @@
+{
+  "idle_enabled": true,
+  "liveliness": 0.7,
+  "behavior_director": true
+}

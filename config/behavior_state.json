@@ -1,0 +1,46 @@
+{
+  "_comment": "Behavior-state model for the Live2D director (Phase 2a). Pure state axes: valence [-1,1], arousal [0,1], engagement [0,1]. Mood tags are pulses that apply fully on a mood CHANGE and with diminishing returns on repeats (idle = 0), then decay exponentially toward baseline using half-lives. Loaded by src/behavior_state.py; the module ships matching defaults so it works standalone for tests.",
+  "mood_impulses": {
+    "idle":        { "dvalence":  0.0,  "darousal":  0.0  },
+    "joyful":      { "dvalence":  0.6,  "darousal":  0.3  },
+    "excited":     { "dvalence":  0.5,  "darousal":  0.8  },
+    "embarrassed": { "dvalence": -0.05, "darousal":  0.5  },
+    "sad":         { "dvalence": -0.8,  "darousal": -0.4  },
+    "angry":       { "dvalence": -0.5,  "darousal":  0.6  },
+    "surprised":   { "dvalence":  0.1,  "darousal":  0.9  },
+    "curious":     { "dvalence":  0.3,  "darousal":  0.5  },
+    "relaxed":     { "dvalence":  0.3,  "darousal": -0.5  },
+    "love":        { "dvalence":  0.9,  "darousal":  0.3  },
+    "aroused":     { "dvalence":  0.4,  "darousal":  0.7  }
+  },
+  "_decay_note": "Half-lives in seconds: the time for an axis to move half-way toward its target (exponential toward baseline). valence -> closeness baseline (~0), arousal -> 0.5, engagement -> condition-dependent target. Larger = slower. I will tune these.",
+  "half_lives": {
+    "valence":    240.0,
+    "arousal":    90.0,
+    "engagement": 120.0
+  },
+  "mood_repeat_scale": 0.5,
+  "state_floor": 0.35,
+  "interaction": {
+    "engagement_boost": 0.35,
+    "arousal_boost":    0.15,
+    "valence_boost":    0.05,
+    "engagement_target_idle": 0.6,
+    "engagement_floor_ignored": 0.25,
+    "engagement_floor_idle_long": 0.12,
+    "ignored_after_s": 300.0,
+    "idle_long_after_s": 900.0
+  },
+  "closeness": {
+    "max": 100.0,
+    "engagement_base": 0.25,
+    "valence_base": 0.15
+  },
+  "listening": {
+    "engagement_target": 1.0
+  },
+  "speaking": {
+    "engagement_target": 1.0
+  },
+  "noise_scale": 0.02
+}

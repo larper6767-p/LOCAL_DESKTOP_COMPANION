@@ -1,0 +1,53 @@
+{
+  "_comment": "Single source of truth for the AI body-control tags. The BODY prompt section, the 'Test body action' menu, and tools/live2d_preview.py are all generated from this file. ParamSwitch21 (highlight-gone) is intentionally NOT defined until the user wants it. Switch param meanings (from the model's cdi3): 1=face-dark, 2=blush, 3=blood, 4=angry, 5=star-eyes, 6=white-eyes, 7=tears-shimmer, 8=heart-eyes, 9=tears, 10=right-hand-up, 11=left-hand-up. NOTE: blush uses ParamSwitch2 (the real blush switch per 脸红.exp3.json), NOT ParamSwitch8 (which is heart-eyes). Phase 3c: fx may use an optional \"expression\" key naming an .exp3.json file (by id, e.g. \"星星眼\", or a filename). It is expanded ONCE at config load into plain params, blended (Add/Overwrite/Multiply) and clamped to the model's real range at apply time — SetExpression is never called. ParamSwitch10/11 (hands) stay disabled until the user describes them after previewing.",
+  "mood_aliases": {
+    "happy":    "joyful",
+    "shy":      "embarrassed",
+    "mad":      "angry",
+    "sad":      "sad",
+    "surprised": "surprised",
+    "glad":     "joyful"
+  },
+  "moods": {
+    "idle":        { "enabled": true },
+    "joyful":      { "enabled": true },
+    "excited":     { "enabled": true },
+    "embarrassed": { "enabled": true },
+    "sad":         { "enabled": true },
+    "angry":       { "enabled": true },
+    "surprised":   { "enabled": true },
+    "curious":     { "enabled": true },
+    "relaxed":     { "enabled": true },
+    "love":        { "enabled": true },
+    "aroused":     { "enabled": true }
+  },
+  "fx": {
+      "blush":      { "enabled": true, "duration": 4.0, "params": { "ParamSwitch2": 1.0 } },
+      "tears":      { "enabled": true, "duration": 4.0, "params": { "ParamSwitch9": 1.0 } },
+      "face_dark":  { "enabled": true, "duration": 2.5, "params": { "ParamSwitch1": 1.0 } },
+      "blood":      { "enabled": true, "duration": 4.0, "params": { "ParamSwitch3": 1.0 } },
+      "hand_right": { "enabled": false, "duration": 2.5, "params": { "ParamSwitch10": 1.0 } },
+      "hand_left":  { "enabled": false, "duration": 2.5, "params": { "ParamSwitch11": 1.0 } },
+      "star_eyes":  { "enabled": true, "duration": 4.0, "expression": "星星眼" },
+      "heart_eyes": { "enabled": true, "duration": 4.0, "expression": "爱心眼" },
+      "white_eyes": { "enabled": true, "duration": 3.0, "expression": "白眼" }
+  },
+  "look": {
+    "left":  { "enabled": true, "duration": 0.8, "params": { "ParamAngleX": 8.0, "ParamEyeBallX": 0.4 } },
+    "right": { "enabled": true, "duration": 0.8, "params": { "ParamAngleX": -8.0, "ParamEyeBallX": -0.4 } },
+    "up":    { "enabled": true, "duration": 0.8, "params": { "ParamAngleY": 6.0, "ParamEyeBallY": -0.3 } },
+    "down":  { "enabled": true, "duration": 0.8, "params": { "ParamAngleY": -6.0, "ParamEyeBallY": 0.3 } }
+  },
+  "gestures": {
+    "nod":   { "enabled": true, "duration": 0.6, "params": { "ParamAngleY": 6.0 } },
+    "shake": { "enabled": true, "duration": 0.6, "params": { "ParamAngleX": 8.0 } },
+    "tilt":  { "enabled": true, "duration": 0.8, "params": { "ParamAngleZ": 9.0 } },
+    "wink":  { "enabled": true, "duration": 0.6,
+                "sides": ["left", "right"], "default_side": "right",
+                "params": { "ParamEyeLOpen": 0.0, "ParamEyeROpen": 0.0 } }
+  },
+  "limits": {
+    "max_tags_per_reply": 4,
+    "max_simultaneous_fx": 3
+  }
+}
